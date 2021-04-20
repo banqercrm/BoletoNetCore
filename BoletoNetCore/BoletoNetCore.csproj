@@ -9,6 +9,8 @@
     <Version>0.0.1</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageId>BoletoNetCore</PackageId>
+    <RepositoryUrl>https://github.com/banqercrm/BoletoNetCore</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
