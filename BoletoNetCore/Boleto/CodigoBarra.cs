@@ -82,22 +82,27 @@ namespace BoletoNetCore
                                       CampoLivre);
 
                 // Calcula Dígito Verificador do Código de Barras
-                int pesoMaximo = 9, soma = 0, peso = 2;
-                for (int i = (codigoSemDv.Length - 1); i >= 0; i--)
+                // Array referencia com dígitos do código de barras.
+                var a = Array.ConvertAll(codigoSemDv.ToCharArray(), c => (int)char.GetNumericValue(c));
+
+                var sum = 0;
+                for (var i = 0; i < a.Length; i++)
                 {
-                    soma = soma + (Convert.ToInt32(codigoSemDv.Substring(i, 1)) * peso);
-                    if (peso == pesoMaximo)
-                        peso = 2;
-                    else
-                        peso = peso + 1;
+                    // Indice para leitura reversa.
+                    var ir = a.Length - 1 - i;
+
+                    // seq: 2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5 ...
+                    var seq = i % 8 + 2;
+
+                    // Soma produto de número sequencial e dígito do código de barras.
+                    sum += seq * a[ir];
                 }
-                var resto = (soma % 11);
 
-                if (resto <= 1 || resto > 9)
-                    return "1";
-                
-                return (11 - resto).ToString();
+                // Calcula-se o DAC.
+                var resto = 11 - sum % 11;
 
+                // Se o resultado desta, for igual a: 0, 1, 10 ou 11, considere DAC = 1.
+                return resto <= 1 || resto > 9 ? "1" : resto.ToString();
             }
         }
     }
