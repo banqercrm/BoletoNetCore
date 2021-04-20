@@ -45,5 +45,10 @@ namespace BoletoNetCore
         public ContaBancaria ContaBancaria { get; set; } = new ContaBancaria();
         public Endereco Endereco { get; set; } = new Endereco();
         public bool MostrarCNPJnoBoleto { get; set; } = true;
+        /// <summary>
+        /// Código do Convênio no Banco
+        /// Código adotado pelo Banco para identificar o Contrato entre este e a Empresa Cliente.
+        /// </summary>
+        public string Convenio { get; set; } = string.Empty;
     }
 }
