@@ -6,7 +6,7 @@ using BoletoNetCore.Exceptions;
 
 namespace BoletoNetCore
 {
-    internal sealed partial class BancoBanpara : BancoFebraban<BancoBanrisul>, IBanco
+    internal sealed partial class BancoBanpara : BancoFebraban<BancoBanpara>, IBanco
     {
         public BancoBanpara()
         {
@@ -24,7 +24,7 @@ namespace BoletoNetCore
             if (!CarteiraFactory<BancoBanrisul>.CarteiraEstaImplementada(contaBancaria.CarteiraComVariacaoPadrao))
                 throw BoletoNetCoreException.CarteiraNaoImplementada(contaBancaria.CarteiraComVariacaoPadrao);
 
-            contaBancaria.FormatarDados("PAGÁVEL EM QUALQUER BANCO ATÉ O VENCIMENTO.", "SAC BANRISUL: 0800 646 1515<br>OUVIDORIA BANRISUL: 0800 644 2200", "", 8);
+            contaBancaria.FormatarDados(localPagamento: "PAGAR PREFERENCIALMENTE EM AGÊNCIA DO BANAPÁ", string.Empty, string.Empty, 10);
 
             Beneficiario.CodigoFormatado = $"{contaBancaria.Agencia}/{contaBancaria.Conta}{contaBancaria.DigitoConta}/{Beneficiario.Convenio}"; // falta incluir convenio.
         }
