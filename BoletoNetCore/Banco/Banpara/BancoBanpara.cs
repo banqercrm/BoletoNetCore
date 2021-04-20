@@ -24,7 +24,7 @@ namespace BoletoNetCore
             if (!CarteiraFactory<BancoBanrisul>.CarteiraEstaImplementada(contaBancaria.CarteiraComVariacaoPadrao))
                 throw BoletoNetCoreException.CarteiraNaoImplementada(contaBancaria.CarteiraComVariacaoPadrao);
 
-            contaBancaria.FormatarDados(localPagamento: "PAGAR PREFERENCIALMENTE EM AGÊNCIA DO BANAPÁ", string.Empty, string.Empty, 10);
+            contaBancaria.FormatarDados("PAGAR PREFERENCIALMENTE EM AGÊNCIA DO BANAPÁ", string.Empty, string.Empty, 10);
 
             Beneficiario.CodigoFormatado = $"{contaBancaria.Agencia}/{contaBancaria.Conta}{contaBancaria.DigitoConta}/{Beneficiario.Convenio}"; // falta incluir convenio.
         }
