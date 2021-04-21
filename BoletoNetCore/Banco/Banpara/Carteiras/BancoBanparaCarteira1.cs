@@ -1,20 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using BoletoNetCore.Extensions;
 
 namespace BoletoNetCore
 {
     [CarteiraCodigo("1")]
     public class BancoBanparaCarteira1 : ICarteira<BancoBanpara>
     {
-        internal static Lazy<ICarteira<BancoBanpara>> Instance { get; } = new Lazy<ICarteira<BancoBanpara>>(() => new BancoBanparaCarteira1());
-
-        public BancoBanparaCarteira1()
-        {
-        }
+        internal static Lazy<ICarteira<BancoBanpara>> Instance { get; } =
+            new Lazy<ICarteira<BancoBanpara>>(() => new BancoBanparaCarteira1());
 
         public void FormataNossoNumero(Boleto boleto)
         {
@@ -38,7 +31,7 @@ namespace BoletoNetCore
 
             var sb = new StringBuilder();
             sb.Append("0000999"); // Fixo.
-            sb.Append(boleto.Banco.Beneficiario.Convenio); // Número do Convênio.
+            sb.Append(boleto.Banco.Beneficiario.Convenio.PadLeft(5, '0')); // Número do Convênio.
             sb.Append(boleto.NossoNumero.PadLeft(13, '0')); // Nosso número com zeros a esquerda.
             return sb.ToString();
         }
