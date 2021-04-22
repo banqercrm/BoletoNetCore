@@ -22,6 +22,7 @@ namespace BoletoNetCore
             boleto.NossoNumero = boleto.NossoNumero;
             boleto.NossoNumeroDV = string.Empty;
             boleto.NossoNumeroFormatado = boleto.NossoNumero;
+            boleto.CarteiraImpressaoBoleto = "CR";
         }
 
         public string FormataCodigoBarraCampoLivre(Boleto boleto)
