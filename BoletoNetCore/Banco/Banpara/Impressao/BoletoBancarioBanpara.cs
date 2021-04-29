@@ -70,10 +70,10 @@ namespace BoletoNetCore
             switch (Boleto.Banco.Beneficiario.TipoCPFCNPJ("A"))
             {
                 case "F":
-                    cpfCnpjBeneficiario = Utils.FormataCPF(Boleto.Pagador.CPFCNPJ);
+                    cpfCnpjBeneficiario = Utils.FormataCPF(Boleto.Banco.Beneficiario.CPFCNPJ);
                     break;
                 case "J":
-                    cpfCnpjBeneficiario = Utils.FormataCNPJ(Boleto.Pagador.CPFCNPJ);
+                    cpfCnpjBeneficiario = Utils.FormataCNPJ(Boleto.Banco.Beneficiario.CPFCNPJ);
                     break;
             }
 
