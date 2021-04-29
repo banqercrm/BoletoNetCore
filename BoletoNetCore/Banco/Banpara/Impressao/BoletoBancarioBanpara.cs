@@ -63,5 +63,21 @@ namespace BoletoNetCore
 
             return enderecoAvalista;
         }
+
+        protected override string GerarCpfCnpjBeneficiario()
+        {
+            var cpfCnpjBeneficiario = string.Empty;
+            switch (Boleto.Banco.Beneficiario.TipoCPFCNPJ("A"))
+            {
+                case "F":
+                    cpfCnpjBeneficiario = Utils.FormataCPF(Boleto.Pagador.CPFCNPJ);
+                    break;
+                case "J":
+                    cpfCnpjBeneficiario = Utils.FormataCNPJ(Boleto.Pagador.CPFCNPJ);
+                    break;
+            }
+
+            return cpfCnpjBeneficiario;
+        }
     }
 }

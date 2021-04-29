@@ -260,6 +260,11 @@ namespace BoletoNetCore
             return enderecoAvalista;
         }
 
+        protected virtual string GerarCpfCnpjBeneficiario()
+        {
+            return Boleto.Banco.Beneficiario.CPFCNPJ;
+        }
+
         private string MontaHtml(string urlImagemLogo, string urlImagemBarra, string imagemCodigoBarras)
         {
             var html = new StringBuilder();
@@ -398,6 +403,8 @@ namespace BoletoNetCore
             if (String.IsNullOrWhiteSpace(_vLocalLogoBeneficiario))
                 _vLocalLogoBeneficiario = urlImagemLogo;
 
+            var cpfCnpjBeneficiario = GerarCpfCnpjBeneficiario();
+
             return html
                 .Replace("@CODIGOBANCO", Utils.FormatCode(Boleto.Banco.Codigo.ToString(), 3))
                 .Replace("@DIGITOBANCO", Boleto.Banco.Digito.ToString())
@@ -432,7 +439,7 @@ namespace BoletoNetCore
                 .Replace("@AVALISTA", avalista)
                 .Replace("@ENDERECOAVALISTA", enderecoAvalista)
                 .Replace("@AGENCIACODIGOBENEFICIARIO", Boleto.Banco.Beneficiario.CodigoFormatado)
-                .Replace("@CPFCNPJ", Boleto.Banco.Beneficiario.CPFCNPJ)
+                .Replace("@CPFCNPJ", cpfCnpjBeneficiario)
                 .Replace("@AUTENTICACAOMECANICA", "")
                 .Replace("@USODOBANCO", Boleto.UsoBanco)
                 .Replace("@IMAGEMCODIGOBARRA", imagemCodigoBarras)
