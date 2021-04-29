@@ -43,9 +43,10 @@ namespace BoletoNetCore
             var enderecoPagador = string.Empty;
             if (!OcultarEnderecoPagador)
             {
-                enderecoPagador = Boleto.Pagador.Endereco.FormataLogradouro(0) + string.Format("{0} - {1}/{2}", Boleto.Pagador.Endereco.Bairro, Boleto.Pagador.Endereco.Cidade, Boleto.Pagador.Endereco.UF);
+                enderecoPagador = $"{Boleto.Pagador.Endereco.FormataLogradouro(0)} {Boleto.Pagador.Endereco.Bairro} - " +
+                                  $"{Boleto.Pagador.Endereco.Cidade}/{Boleto.Pagador.Endereco.UF}";
                 if (Boleto.Pagador.Endereco.CEP != String.Empty)
-                    enderecoPagador += string.Format(" - CEP: {0}", Utils.FormataCEP(Boleto.Pagador.Endereco.CEP));
+                    enderecoPagador += $" - CEP: {Utils.FormataCEP(Boleto.Pagador.Endereco.CEP)}";
             }
 
             return enderecoPagador;
