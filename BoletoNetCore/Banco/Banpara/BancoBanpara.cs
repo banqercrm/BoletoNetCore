@@ -26,7 +26,7 @@ namespace BoletoNetCore
 
             contaBancaria.FormatarDados("PAGAR PREFERENCIALMENTE EM AGÊNCIA DO BANPARÁ", string.Empty, string.Empty, 10);
 
-            Beneficiario.CodigoFormatado = $"{contaBancaria.Agencia}/{contaBancaria.Conta}{contaBancaria.DigitoConta}/{Beneficiario.Convenio}"; // falta incluir convenio.
+            Beneficiario.CodigoFormatado = $"{contaBancaria.Agencia}/{int.Parse(contaBancaria.Conta)}{contaBancaria.DigitoConta}/{Beneficiario.Convenio}"; // falta incluir convenio.
         }
 
         public override string FormatarNomeArquivoRemessa(int numeroSequencial)
