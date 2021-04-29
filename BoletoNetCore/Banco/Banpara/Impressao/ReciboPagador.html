@@ -1,0 +1,88 @@
+﻿<!-- RECIBO PAGADOR - INICIO -->
+<!-- Recibo Pagador - Header -->
+<table class="w666">
+    <tr class="BHead">
+        <td class="imgLogo Al"><img src="@URLIMGBENEFICIARIO" /></td>
+        <td class="barra"><img src="@URLIMAGEMBARRA" /></td>
+        <td class="w65 Ab bc Ac">@CODIGOBANCO-@DIGITOBANCO</td>
+        <td class="barra"><img src="@URLIMAGEMBARRA" /></td>
+        <td class="w450 Ar Ab ld">Recibo do Pagador</td>
+    </tr>
+</table>
+
+<!-- Recibo Pagador - Linha 1 -->
+<table class="w666">
+    <tr class="ct h13 At">
+        <td class="w25pr">Vencimento</td>
+        <td class="w25pr">Agência / Conta Corrente / Convênio</td>
+        <td class="w25pr">Número Documento</td>
+        <td class="w25pr">Nosso Número/Código do Documento</td>
+    </tr>
+    <tr class="cp h12 At rBb">
+        <td>@DATAVENCIMENTO</td>
+        <td>@AGENCIACODIGOBENEFICIARIO</td>
+        <td>@NUMERODOCUMENTO</td>
+        <td class="Ar">@NOSSONUMERO</td>
+    </tr>
+</table>
+
+<!-- Recibo Pagador - Linha 2 -->
+<table class="w666">
+    <tr class="ct h13 At">
+        <td class="w25pr">Valor do Documento</td>
+        <td class="w25pr">(-) Descontos</td>
+        <td class="w25pr">(+) Acréscimos</td>
+        <td class="w25pr">(=) Valor Cobrado</td>
+    </tr>
+    <tr class="cp h12 At rBb">
+        <td>@VALORDOCUMENTO</td>
+        <td>@DESCONTOS</td>
+        <td>@OUTROSACRESCIMOS</td>
+        <td class="Ar">@VALORCOBRADO</td>
+    </tr>
+</table>
+
+<!-- Recibo Pagador - Pagador -->
+<table class="cpN mt6 w666">
+    <!-- Pagador -->
+    <tr>
+        <td class="ct At" colspan="2">Pagador</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class="w34"></td>
+        <td>@PAGADOR</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>@ENDERECOPAGADOR</td>
+    </tr>
+    <!-- Sacador / Avalista -->
+    <tr>
+        <td class="ct At" colspan="2">Sacador/Avalista</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>@AVALISTA</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>@ENDERECOAVALISTA</td>
+    </tr>
+    <!-- Beneficiário -->
+    <tr class="BT2">
+        <td class="ct At" colspan="2">Beneficiário</td>
+        <td></td>
+        <td class="ct Ar">Autenticação Mecânica</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>ANDERSON CLAYTON AQUINO PANTOJA - 517.483.202-20</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>TV APINAGES, 636 - BATISTA CAMPOS - 66033170 - BELÉM - PA</td>
+    </tr>
+</table>
+<!-- RECIBO PAGADOR - FIM -->

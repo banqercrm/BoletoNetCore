@@ -377,3 +377,11 @@ img {
 	border-right: dotted 1px #000000;
 	margin-right: 4px;
 }
+
+.w25pr {
+    width: 25%;
+}
+
+.mt6 {
+    margin-top: 6px;
+}

@@ -86,7 +86,7 @@ namespace BoletoNetCore
             }
         }
 
-        private string GetResourceHypertext(string resourcePath)
+        protected string GetResourceHypertext(string resourcePath)
         {
             var assembly = Assembly.GetExecutingAssembly();
             using (var str = new StreamReader(assembly.GetManifestResourceStream(resourcePath)))
@@ -159,7 +159,7 @@ namespace BoletoNetCore
                 .Replace("@TELEFONE", telefone)
                 .Replace("#BOLETO#", htmlBoleto);
         }
-        public string GeraHtmlReciboPagador()
+        public virtual string GeraHtmlReciboPagador()
         {
             try
             {
@@ -185,7 +185,7 @@ namespace BoletoNetCore
             }
         }
 
-        public string GeraHtmlReciboBeneficiario()
+        public virtual string GeraHtmlReciboBeneficiario()
         {
             try
             {
@@ -357,6 +357,13 @@ namespace BoletoNetCore
                     avalista += " - " + Boleto.Avalista.Observacoes;
             }
 
+            var enderecoAvalista = string.Empty;
+            if (!OcultarEnderecoPagador)
+            {
+                enderecoAvalista = Boleto.Avalista.Endereco.FormataLogradouro(0) + "<br />" + $"{Boleto.Avalista.Endereco.Bairro} - {Boleto.Avalista.Endereco.Cidade}/{Boleto.Avalista.Endereco.UF}";
+                if (Boleto.Avalista.Endereco.CEP != String.Empty)
+                    enderecoAvalista += $" - CEP: {Utils.FormataCEP(Boleto.Avalista.Endereco.CEP)}";
+            }
 
             if (!FormatoCarne)
                 html.Append(GeraHtmlReciboBeneficiario());
@@ -405,6 +412,7 @@ namespace BoletoNetCore
                 .Replace("@PAGADOR", pagador)
                 .Replace("@ENDERECOPAGADOR", enderecoPagador)
                 .Replace("@AVALISTA", avalista)
+                .Replace("@ENDERECOAVALISTA", enderecoAvalista)
                 .Replace("@AGENCIACODIGOBENEFICIARIO", Boleto.Banco.Beneficiario.CodigoFormatado)
                 .Replace("@CPFCNPJ", Boleto.Banco.Beneficiario.CPFCNPJ)
                 .Replace("@AUTENTICACAOMECANICA", "")
