@@ -23,11 +23,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Banco\Banpara\Impressao\DivisorParaUsoAgencia.html" />
     <None Remove="Banco\Banpara\Impressao\ReciboBeneficiario.html" />
     <None Remove="Banco\Banpara\Impressao\ReciboPagador.html" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Banco\Banpara\Impressao\DivisorParaUsoAgencia.html" />
     <EmbeddedResource Include="Banco\Banpara\Impressao\ReciboBeneficiario.html" />
     <EmbeddedResource Include="Banco\Banpara\Impressao\ReciboPagador.html" />
   </ItemGroup>
