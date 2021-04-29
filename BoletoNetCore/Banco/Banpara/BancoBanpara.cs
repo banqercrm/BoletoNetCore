@@ -6,7 +6,7 @@ using BoletoNetCore.Exceptions;
 
 namespace BoletoNetCore
 {
-    internal sealed partial class BancoBanpara : BancoFebraban<BancoBanpara>, IBanco
+    internal sealed class BancoBanpara : BancoFebraban<BancoBanpara>, IBanco
     {
         public BancoBanpara()
         {

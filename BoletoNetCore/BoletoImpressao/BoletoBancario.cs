@@ -14,7 +14,7 @@ namespace BoletoNetCore
     using System.Linq;
 
     [Serializable()]
-    public class BoletoBancario 
+    public class BoletoBancario
     {
         String _vLocalLogoBeneficiario = String.Empty;
 
@@ -58,6 +58,8 @@ namespace BoletoNetCore
 
         public bool OcultarEnderecoPagador { get; set; }
 
+        public bool OcultarEnderecoAvalista { get; set; } = true;
+
         public bool OcultarInstrucoes { get; set; }
 
         public bool OcultarReciboPagador { get; set; }
@@ -73,14 +75,14 @@ namespace BoletoNetCore
 
         #endregion Propriedades
 
-       
+
 
         #region Override
 
         private string GetResourceImage(string resourcePath)
         {
             var assembly = Assembly.GetExecutingAssembly();
-            using (var str = new BinaryReader( assembly.GetManifestResourceStream(resourcePath)))
+            using (var str = new BinaryReader(assembly.GetManifestResourceStream(resourcePath)))
             {
                 return Convert.ToBase64String(str.ReadBytes((int)str.BaseStream.Length));
             }
@@ -223,11 +225,39 @@ namespace BoletoNetCore
                 html.Append(GetResourceHypertext("BoletoNetCore.BoletoImpressao.Parts.ComprovanteEntrega5.html"));
                 html.Append(GetResourceHypertext("BoletoNetCore.BoletoImpressao.Parts.ComprovanteEntrega6.html"));
 
-                html.Append(MostrarComprovanteEntregaLivre ? GetResourceHypertext("BoletoNetCore.BoletoImpressao.Parts.ComprovanteEntrega71.html") : GetResourceHypertext("BoletoNetCore.BoletoImpressao.Parts.ComprovanteEntrega7.html") );
+                html.Append(MostrarComprovanteEntregaLivre ? GetResourceHypertext("BoletoNetCore.BoletoImpressao.Parts.ComprovanteEntrega71.html") : GetResourceHypertext("BoletoNetCore.BoletoImpressao.Parts.ComprovanteEntrega7.html"));
 
                 html.Append("<br />");
                 return html.ToString();
             }
+        }
+
+        protected virtual string GerarEnderecoPagador()
+        {
+            var enderecoPagador = string.Empty;
+            if (!OcultarEnderecoPagador)
+            {
+                enderecoPagador = Boleto.Pagador.Endereco.FormataLogradouro(0) + "<br />" + string.Format("{0} - {1}/{2}", Boleto.Pagador.Endereco.Bairro, Boleto.Pagador.Endereco.Cidade, Boleto.Pagador.Endereco.UF);
+                if (Boleto.Pagador.Endereco.CEP != String.Empty)
+                    enderecoPagador += string.Format(" - CEP: {0}", Utils.FormataCEP(Boleto.Pagador.Endereco.CEP));
+            }
+
+            return enderecoPagador;
+        }
+
+        protected virtual string GerarEnderecoAvalista()
+        {
+            var enderecoAvalista = string.Empty;
+            if (!OcultarEnderecoAvalista && !string.IsNullOrEmpty(Boleto.Avalista.Endereco.LogradouroEndereco))
+            {
+                enderecoAvalista = Boleto.Avalista.Endereco.FormataLogradouro(0);
+                if (!string.IsNullOrEmpty(Boleto.Avalista.Endereco.Bairro) && !string.IsNullOrEmpty(Boleto.Avalista.Endereco.Cidade) && !string.IsNullOrEmpty(Boleto.Avalista.Endereco.UF))
+                    enderecoAvalista += "<br />" + $"{Boleto.Avalista.Endereco.Bairro} - {Boleto.Avalista.Endereco.Cidade}/{Boleto.Avalista.Endereco.UF}";
+                if (!string.IsNullOrEmpty(Boleto.Avalista.Endereco.CEP))
+                    enderecoAvalista += $" - CEP: {Utils.FormataCEP(Boleto.Avalista.Endereco.CEP)}";
+            }
+
+            return enderecoAvalista;
         }
 
         private string MontaHtml(string urlImagemLogo, string urlImagemBarra, string imagemCodigoBarras)
@@ -331,13 +361,7 @@ namespace BoletoNetCore
             if (Boleto.Pagador.Observacoes != string.Empty)
                 pagador += " - " + Boleto.Pagador.Observacoes;
 
-            var enderecoPagador = string.Empty;
-            if (!OcultarEnderecoPagador)
-            {
-                enderecoPagador = Boleto.Pagador.Endereco.FormataLogradouro(0) + "<br />" + string.Format("{0} - {1}/{2}", Boleto.Pagador.Endereco.Bairro, Boleto.Pagador.Endereco.Cidade, Boleto.Pagador.Endereco.UF);
-                if (Boleto.Pagador.Endereco.CEP != String.Empty)
-                    enderecoPagador += string.Format(" - CEP: {0}", Utils.FormataCEP(Boleto.Pagador.Endereco.CEP));
-            }
+            var enderecoPagador = GerarEnderecoPagador();
 
             // Dados do Avalista
             var avalista = string.Empty;
@@ -357,13 +381,7 @@ namespace BoletoNetCore
                     avalista += " - " + Boleto.Avalista.Observacoes;
             }
 
-            var enderecoAvalista = string.Empty;
-            if (!OcultarEnderecoPagador)
-            {
-                enderecoAvalista = Boleto.Avalista.Endereco.FormataLogradouro(0) + "<br />" + $"{Boleto.Avalista.Endereco.Bairro} - {Boleto.Avalista.Endereco.Cidade}/{Boleto.Avalista.Endereco.UF}";
-                if (Boleto.Avalista.Endereco.CEP != String.Empty)
-                    enderecoAvalista += $" - CEP: {Utils.FormataCEP(Boleto.Avalista.Endereco.CEP)}";
-            }
+            var enderecoAvalista = GerarEnderecoAvalista();
 
             if (!FormatoCarne)
                 html.Append(GeraHtmlReciboBeneficiario());
@@ -872,7 +890,7 @@ namespace BoletoNetCore
             return s;
         }
 
-        
+
         #endregion Geração do Html OffLine
 
         public Image GeraImagemCodigoBarras(Boleto boleto)
