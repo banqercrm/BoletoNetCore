@@ -357,6 +357,13 @@ namespace BoletoNetCore
                     avalista += " - " + Boleto.Avalista.Observacoes;
             }
 
+            var enderecoAvalista = string.Empty;
+            if (!OcultarEnderecoPagador)
+            {
+                enderecoAvalista = Boleto.Avalista.Endereco.FormataLogradouro(0) + "<br />" + $"{Boleto.Avalista.Endereco.Bairro} - {Boleto.Avalista.Endereco.Cidade}/{Boleto.Avalista.Endereco.UF}";
+                if (Boleto.Avalista.Endereco.CEP != String.Empty)
+                    enderecoAvalista += $" - CEP: {Utils.FormataCEP(Boleto.Avalista.Endereco.CEP)}";
+            }
 
             if (!FormatoCarne)
                 html.Append(GeraHtmlReciboBeneficiario());
@@ -405,6 +412,7 @@ namespace BoletoNetCore
                 .Replace("@PAGADOR", pagador)
                 .Replace("@ENDERECOPAGADOR", enderecoPagador)
                 .Replace("@AVALISTA", avalista)
+                .Replace("@ENDERECOAVALISTA", enderecoAvalista)
                 .Replace("@AGENCIACODIGOBENEFICIARIO", Boleto.Banco.Beneficiario.CodigoFormatado)
                 .Replace("@CPFCNPJ", Boleto.Banco.Beneficiario.CPFCNPJ)
                 .Replace("@AUTENTICACAOMECANICA", "")
