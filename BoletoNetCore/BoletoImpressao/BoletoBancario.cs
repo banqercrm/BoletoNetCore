@@ -86,7 +86,7 @@ namespace BoletoNetCore
             }
         }
 
-        private string GetResourceHypertext(string resourcePath)
+        protected string GetResourceHypertext(string resourcePath)
         {
             var assembly = Assembly.GetExecutingAssembly();
             using (var str = new StreamReader(assembly.GetManifestResourceStream(resourcePath)))
@@ -159,7 +159,7 @@ namespace BoletoNetCore
                 .Replace("@TELEFONE", telefone)
                 .Replace("#BOLETO#", htmlBoleto);
         }
-        public string GeraHtmlReciboPagador()
+        public virtual string GeraHtmlReciboPagador()
         {
             try
             {
@@ -185,7 +185,7 @@ namespace BoletoNetCore
             }
         }
 
-        public string GeraHtmlReciboBeneficiario()
+        public virtual string GeraHtmlReciboBeneficiario()
         {
             try
             {
