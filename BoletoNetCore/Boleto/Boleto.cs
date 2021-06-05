@@ -16,6 +16,12 @@ namespace BoletoNetCore
         /// <param name="banco"></param>
         public Boleto(IBanco banco)
         {
+            if (banco == null)
+                throw new ArgumentNullException(nameof(banco));
+            if (banco.Beneficiario == null)
+                throw new ArgumentException("Beneficiário não definido.", nameof(banco.Beneficiario));
+            if (banco.Beneficiario.ContaBancaria == null)
+                throw new ArgumentException("Conta Bancária não definida.", nameof(banco.Beneficiario.ContaBancaria));
             Banco = banco;
             Carteira = banco.Beneficiario.ContaBancaria.CarteiraPadrao;
             CarteiraImpressaoBoleto = banco.Beneficiario.ContaBancaria.CarteiraPadrao;
