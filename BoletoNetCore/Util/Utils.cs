@@ -7,11 +7,11 @@ using System.IO;
 
 namespace BoletoNetCore
 {
-    static class Utils
+    public static class Utils
     {
-        internal static string FormatCode(string text, int length) => text.PadLeft(length, '0');
+        public static string FormatCode(string text, int length) => text.PadLeft(length, '0');
 
-        internal static bool ToBool(object value)
+        public static bool ToBool(object value)
         {
             try
             {
@@ -23,7 +23,7 @@ namespace BoletoNetCore
             }
         }
 
-        internal static int ToInt32(string value)
+        public static int ToInt32(string value)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace BoletoNetCore
             }
         }
 
-        internal static long ToInt64(string value)
+        public static long ToInt64(string value)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace BoletoNetCore
             }
         }
 
-        internal static string ToString(object value)
+        public static string ToString(object value)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace BoletoNetCore
             }
         }
 
-        internal static DateTime ToDateTime(object value)
+        public static DateTime ToDateTime(object value)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace BoletoNetCore
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static string FormataCPFCPPJ(string value)
+        public static string FormataCPFCPPJ(string value)
         {
             if (value.Trim().Length == 11)
                 return FormataCPF(value);
@@ -102,7 +102,7 @@ namespace BoletoNetCore
         /// </summary>
         /// <param name="cpf">Sequencia numérica de 11 dígitos. Exemplo: 00000000000</param>
         /// <returns>CPF formatado</returns>
-        internal static string FormataCPF(string cpf)
+        public static string FormataCPF(string cpf)
         {
             try
             {
@@ -119,7 +119,7 @@ namespace BoletoNetCore
         /// </summary>
         /// <param name="cnpj">Sequencia numérica de 14 dígitos. Exemplo: 00000000000000</param>
         /// <returns>CNPJ formatado</returns>
-        internal static string FormataCNPJ(string cnpj)
+        public static string FormataCNPJ(string cnpj)
         {
             try
             {
@@ -136,7 +136,7 @@ namespace BoletoNetCore
         /// </summary>
         /// <param name="cep">Sequencia numérica de 8 dígitos. Exemplo: 00000000</param>
         /// <returns>CEP formatado</returns>
-        internal static string FormataCEP(string cep)
+        public static string FormataCEP(string cep)
         {
             try
             {
@@ -223,7 +223,7 @@ namespace BoletoNetCore
             }
         }
 
-        internal static Image DrawText(string text, Font font, Color textColor, Color backColor)
+        public static Image DrawText(string text, Font font, Color textColor, Color backColor)
         {
             //first, create a dummy bitmap just to get a graphics object
             Image img = new Bitmap(1, 1);
