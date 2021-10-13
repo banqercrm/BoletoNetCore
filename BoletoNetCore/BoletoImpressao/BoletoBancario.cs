@@ -6,6 +6,7 @@ using System.IO;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace BoletoNetCore
@@ -90,8 +91,10 @@ namespace BoletoNetCore
 
         protected string GetResourceHypertext(string resourcePath)
         {
-            var assembly = Assembly.GetExecutingAssembly();
-            using (var str = new StreamReader(assembly.GetManifestResourceStream(resourcePath)))
+            var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourcePath) ?? Assembly.GetCallingAssembly().GetManifestResourceStream(resourcePath);
+            if (stream == null)
+                throw new ArgumentException("Recurso não encontrado no assembly, Resource Path inválido.");
+            using (var str = new StreamReader(stream))
             {
                 return str.ReadToEnd();
             }
