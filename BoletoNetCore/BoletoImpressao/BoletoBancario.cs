@@ -456,9 +456,9 @@ namespace BoletoNetCore
                 .Replace("@ENDERECOBENEFICIARIO", MostrarEnderecoBeneficiario ? enderecoBeneficiario : "")
                 .Replace("@INSTRUCOES", Boleto.MensagemInstrucoesCaixaFormatado.Replace(Environment.NewLine, "<br/>"))
                 .Replace("@MENSAGEMINSTRUCOESRECIBOPAGADORFORMATADO", this.Boleto.MensagemInstrucoesReciboPagadorFormatado.Replace(Environment.NewLine, "<br/>"))
-                .Replace("@CODIGOBARRAOVERRIDE", codigoBarraOverride)
-                .Replace("@LINHADIGITAVELOVERRIDE", Boleto.LinhaDigitavelOverride)
-                .Replace("@AGENCIACODIGOBENEFICIARIOOVERRIDE", Boleto.AgenciaCodigoBeneficiarioOverride);
+                .Replace("@_CODIGOBARRAOVERRIDE", codigoBarraOverride)
+                .Replace("@_LINHADIGITAVELOVERRIDE", Boleto.LinhaDigitavelOverride)
+                .Replace("@_AGENCIACODIGOBENEFICIARIOOVERRIDE", Boleto.AgenciaCodigoBeneficiarioOverride);
         }
 
         #endregion Html
