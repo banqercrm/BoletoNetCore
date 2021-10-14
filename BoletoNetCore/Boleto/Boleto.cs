@@ -220,6 +220,9 @@ namespace BoletoNetCore
         public Pagador Pagador { get; set; } = new Pagador();
         public Pagador Avalista { get; set; } = new Pagador();
         public CodigoBarra CodigoBarra { get; } = new CodigoBarra();
+        public string CodigoBarraOverride { get; set; } = string.Empty;
+        public string LinhaDigitavelOverride { get; set; } = string.Empty;
+        public string AgenciaCodigoBeneficiarioOverride { get; set; } = string.Empty;
         public ObservableCollection<GrupoDemonstrativo> Demonstrativos { get; } = new ObservableCollection<GrupoDemonstrativo>();
 
         public void ValidarDados()

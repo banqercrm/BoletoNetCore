@@ -408,6 +408,11 @@ namespace BoletoNetCore
 
             var cpfCnpjBeneficiario = GerarCpfCnpjBeneficiario();
 
+            string codigoBarraOverride = null;
+            if (!string.IsNullOrEmpty(this.Boleto.CodigoBarraOverride))
+                codigoBarraOverride = "<img src=\"data:image/jpg;base64," +
+                                      GetCodBarraCode(Boleto.CodigoBarraOverride) + "\" alt=\"Código de Barras\" />";
+
             return html
                 .Replace("@CODIGOBANCO", Utils.FormatCode(Boleto.Banco.Codigo.ToString(), 3))
                 .Replace("@DIGITOBANCO", Boleto.Banco.Digito.ToString())
@@ -450,7 +455,10 @@ namespace BoletoNetCore
                 .Replace("@ENDERECOBENEFICIARIO_BOLETO", MostrarEnderecoBeneficiario ? string.Format(" - {0}", enderecoBeneficiarioCompacto) : "")
                 .Replace("@ENDERECOBENEFICIARIO", MostrarEnderecoBeneficiario ? enderecoBeneficiario : "")
                 .Replace("@INSTRUCOES", Boleto.MensagemInstrucoesCaixaFormatado.Replace(Environment.NewLine, "<br/>"))
-                .Replace("@MENSAGEMINSTRUCOESRECIBOPAGADORFORMATADO", this.Boleto.MensagemInstrucoesReciboPagadorFormatado.Replace(Environment.NewLine, "<br/>"));
+                .Replace("@MENSAGEMINSTRUCOESRECIBOPAGADORFORMATADO", this.Boleto.MensagemInstrucoesReciboPagadorFormatado.Replace(Environment.NewLine, "<br/>"))
+                .Replace("@CODIGOBARRAOVERRIDE", codigoBarraOverride)
+                .Replace("@LINHADIGITAVELOVERRIDE", Boleto.LinhaDigitavelOverride)
+                .Replace("@AGENCIACODIGOBENEFICIARIOOVERRIDE", Boleto.AgenciaCodigoBeneficiarioOverride);
         }
 
         #endregion Html
