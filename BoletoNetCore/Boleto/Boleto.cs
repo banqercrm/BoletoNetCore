@@ -213,6 +213,7 @@ namespace BoletoNetCore
         public string MensagemInstrucoesCaixaFormatado { get; set; } = string.Empty;
         public string MensagemArquivoRemessa { get; set; } = string.Empty;
         public string RegistroArquivoRetorno { get; set; } = string.Empty;
+        public string CampoLivre { get; set; }
 
         public IBanco Banco { get; set; }
         public Pagador Pagador { get; set; } = new Pagador();
