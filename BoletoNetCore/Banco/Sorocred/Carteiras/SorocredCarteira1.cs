@@ -17,7 +17,7 @@ namespace BoletoNetCore
 
         public string FormataCodigoBarraCampoLivre(Boleto boleto)
         {
-            return "YHGT";
+            return boleto.CodigoBarra.CampoLivre;
         }
     }
 }
