@@ -13,6 +13,7 @@ namespace BoletoNetCore
 
         public void FormataNossoNumero(Boleto boleto)
         {
+            boleto.NossoNumeroFormatado = $"{boleto.NossoNumero}{boleto.NossoNumeroDV}";
         }
 
         public string FormataCodigoBarraCampoLivre(Boleto boleto)

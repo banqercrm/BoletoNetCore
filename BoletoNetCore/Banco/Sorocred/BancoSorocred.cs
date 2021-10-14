@@ -20,7 +20,7 @@ namespace BoletoNetCore
         {
             var contaBancaria = this.Beneficiario.ContaBancaria;
             //contaBancaria.FormatarDados("PAGAR PREFERENCIALMENTE EM AGÊNCIA DO SOROCRED", string.Empty, string.Empty, 10);
-            this.Beneficiario.CodigoFormatado = $"{contaBancaria.Agencia}/{int.Parse(contaBancaria.Conta)}{contaBancaria.DigitoConta}/ABCDE";
+            this.Beneficiario.CodigoFormatado = $"{contaBancaria.Agencia}/{int.Parse(contaBancaria.Conta)}{contaBancaria.DigitoConta}";
         }
     }
 }
