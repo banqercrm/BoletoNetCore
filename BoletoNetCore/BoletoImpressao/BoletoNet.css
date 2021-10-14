@@ -177,6 +177,10 @@ img {
 	vertical-align: top;
 }
 
+.h200 {
+    height: 200px;
+}
+
 .w6 {
 	width: 6px;
 }
