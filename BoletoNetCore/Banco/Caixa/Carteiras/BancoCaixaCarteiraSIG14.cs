@@ -51,6 +51,11 @@ namespace BoletoNetCore
 
         public string FormataCodigoBarraCampoLivre(Boleto boleto)
         {
+            if (string.IsNullOrEmpty(boleto.NossoNumero) && !string.IsNullOrEmpty(boleto.NossoNumeroFormatado))
+            {
+                // Nosso número já formatado.
+                return "0".PadLeft(25, '0');
+            }
             var beneficiario = boleto.Banco.Beneficiario;
             var contaBancaria = beneficiario.ContaBancaria;
             var formataCampoLivre = $"{beneficiario.Codigo}{beneficiario.CodigoDV}{boleto.NossoNumero.Substring(2, 3)}1{boleto.NossoNumero.Substring(5, 3)}4{boleto.NossoNumero.Substring(8, 9)}";
