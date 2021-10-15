@@ -18,16 +18,18 @@ namespace BoletoNetCore
         {
             boleto.CarteiraImpressaoBoleto = "RG";
 
+            if (string.IsNullOrEmpty(boleto.NossoNumero) && !string.IsNullOrEmpty(boleto.NossoNumeroFormatado))
+            {
+                // Nosso número já formatado.
+                return;
+            }
+
             // Carteira SIG14: Dúvida: Se o Cliente SEMPRE emite o boleto, pois o nosso número começa com 14, o que significa Título Registrado emissão Empresa:
             // O nosso número não pode ser em branco.
             if (IsNullOrWhiteSpace(boleto.NossoNumero))
                 throw new Exception("Nosso Número não informado.");
 
-            if (string.IsNullOrEmpty(boleto.NossoNumero) && boleto.NossoNumeroFormatado.Length > 0)
-            {
-                // Nosso número já formatado.
-                return;
-            }
+            
 
             if (boleto.NossoNumero.Length == 17)
             {
