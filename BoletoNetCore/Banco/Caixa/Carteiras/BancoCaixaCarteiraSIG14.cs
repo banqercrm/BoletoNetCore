@@ -23,6 +23,12 @@ namespace BoletoNetCore
             if (IsNullOrWhiteSpace(boleto.NossoNumero))
                 throw new Exception("Nosso Número não informado.");
 
+            if (string.IsNullOrEmpty(boleto.NossoNumero) && boleto.NossoNumeroFormatado.Length > 0)
+            {
+                // Nosso número já formatado.
+                return;
+            }
+
             if (boleto.NossoNumero.Length == 17)
             {
                 // Se o Nosso Número tem 17 dígitos, obrigatoriamente deve iniciar com "14"
