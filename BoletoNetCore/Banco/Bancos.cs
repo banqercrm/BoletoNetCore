@@ -7,6 +7,7 @@ namespace BoletoNetCore
         Santander = 033,
         Banpara = 037,
         Banrisul = 041,
+        Brb = 70,
         Caixa = 104,
         Bradesco = 237,
         Sorocred = 299,

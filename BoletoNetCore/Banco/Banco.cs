@@ -15,6 +15,7 @@ namespace BoletoNetCore
             [033] = BancoSantander.Instance,
             [037] = BancoBanpara.Instance,
             [041] = BancoBanrisul.Instance,
+            [070] = BancoBrasilia.Instance,
             [104] = BancoCaixa.Instance,
             [237] = BancoBradesco.Instance,
             [299] = BancoSorocred.Instance,
