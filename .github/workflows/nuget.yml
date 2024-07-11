@@ -8,6 +8,7 @@ on:
 
 env:
   PROJECT_PATH: 'BoletoNetCore/BoletoNetCore.csproj'
+  PROJECT_PATH_QUEST: 'BoletoNetCore.QuestPdf/BoletoNetCore.QuestPdf.csproj'
   PACKAGE_OUTPUT_DIR: ${{ github.workspace }}/output
   NUGET_SOURCE_URL: 'https://nuget.pkg.github.com/banqercrm/index.json'
 
@@ -27,12 +28,21 @@ jobs:
       
     - name: 'Restore packages'
       run: dotnet restore ${{ env.PROJECT_PATH }}
+      
+    - name: 'Restore packages'
+      run: dotnet restore ${{ env.PROJECT_PATH_QUEST }}
 
     - name: 'Build project'
       run: dotnet build ${{ env.PROJECT_PATH }} --no-restore --configuration Release
+      
+    - name: 'Build project'
+      run: dotnet build ${{ env.PROJECT_PATH_QUEST }} --no-restore --configuration Release
 
     - name: 'Pack Project'
       run: dotnet pack ${{ env.PROJECT_PATH }} --no-restore --no-build --configuration Release -p:PackageVersion=${{ github.ref_name }} --output ${{ env.PACKAGE_OUTPUT_DIR }}
+      
+    - name: 'Pack Project'
+      run: dotnet pack ${{ env.PROJECT_PATH_QUEST }} --no-restore --no-build --configuration Release -p:PackageVersion=${{ github.ref_name }} --output ${{ env.PACKAGE_OUTPUT_DIR }}
 
     - name: 'Push package'
-      run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIR }}/*.nupkg -k ${{ secrets.NUGET_AUTH_TOKEN }} -s ${{ env.NUGET_SOURCE_URL }}
+      run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIR }}/'*.nupkg' -k ${{ secrets.NUGET_AUTH_TOKEN }} -s ${{ env.NUGET_SOURCE_URL }}
