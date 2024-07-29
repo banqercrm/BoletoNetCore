@@ -111,8 +111,10 @@ namespace BoletoNetCore.QuestPDF.AppTeste
                 ValorJurosDia = (decimal)(100 * i * (0.2 / 100)),
                 AvisoDebitoAutomaticoContaCorrente = "2",
                 MensagemArquivoRemessa = "Mensagem para o arquivo remessa",
-                NumeroControleParticipante = "CHAVEPRIMARIA" + _proximoNossoNumero
+                NumeroControleParticipante = "CHAVEPRIMARIA" + _proximoNossoNumero,
+                CodigoBarra = { CodigoDeBarras = "07092979000001150223000276002806100016007066", LinhaDigitavel = "07093.00024  76002.806107  00160.070660  2  97900000115022" }
             };
+            boleto.CodigoBarra.CampoLivre = boleto.CodigoBarra.CodigoDeBarras.Substring(19, 25);
             // Mensagem - Instruções do Caixa
             boleto.ImprimirValoresAuxiliares = true;
 

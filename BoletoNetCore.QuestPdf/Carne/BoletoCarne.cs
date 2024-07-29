@@ -39,6 +39,15 @@ namespace BoletoNetCore.QuestPdf
             {
                 byte[] logo = null;
                 int codBanco = 0;
+
+                if (!string.IsNullOrEmpty(this.listaBoletos.TermoAcordo))
+                {
+                    stack.Item().PaddingBottom(3).Text("Termo de Acordo", BoletoPdfConstants.TitleStyle);
+                    stack.Item().ExtendHorizontal().BorderHorizontal(BoletoPdfConstants.BorderSize);
+                    stack.Item().Text(this.listaBoletos.TermoAcordo, BoletoPdfConstants.NormalFieldStyle);
+                    stack.Item().PaddingBottom(5).ExtendHorizontal().BorderHorizontal(BoletoPdfConstants.BorderSize);
+                }
+
                 foreach (var bol in this.listaBoletos)
                 {
                     if (logo == null || codBanco != bol.Banco.Codigo)
