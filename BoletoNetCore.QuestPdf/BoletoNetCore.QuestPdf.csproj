@@ -2,8 +2,8 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
-		<PackageId>BoletoNetCore.QuestPdf</PackageId>
-		<title>BoletoNetCore.QuestPdf</title>
+		<PackageId>Banqer.BoletoNetCore.QuestPdf</PackageId>
+		<title>Banqer.BoletoNetCore.QuestPdf</title>
 		<version>3.0.0</version>
 		<authors>BoletoNetCore</authors>
 		<owners>BoletoNetCore</owners>
